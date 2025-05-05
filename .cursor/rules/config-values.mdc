@@ -1,0 +1,16 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Following app config values 
+
+ehrbase server baseURL: https://openehr-bootcamp.medblocks.com/ehrbase
+
+openehrBaseUrl: {{baseUrl}}/rest/openehr/v1
+
+template_id: Basic_Vitals_Dominique.v2
+
+ehrId: 059c35b6-c6ab-4d30-be30-d62c33c1cdd9
+
+webtemplate path : /src/lib/utils/vitals_webtemplate.json

@@ -1,0 +1,60 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# openEHR Vital Signs Application - PRD
+
+
+## Technical Architecture
+
+### Application Flow
+1. load openEHR webtemplate present in the utils folder into mb-auto-form
+2. Medblocks UI renders form based on template
+3. User enters vital signs
+4. mb-auto-form generates a vaid flat openEHR composition 
+5. submits it to the ehrbase openEHR composition endpoint using a button 
+7. User receives confirmation of successful and clear the form
+8. List the created compositions usinf an AQL query to the ehrbase server based on the template ID and ehr id
+9. The listed compositions need to have two buttons Edit and Delete
+10.The Edit button does a update and allows editing of composition. 
+11.The Delete button allows to delete a composition
+
+
+
+
+### API Requirements
+- POST /composition?templateId={{templateId}} for creating new vital signs records
+- PUT /composition?templateId={{templateId}} for updating existing records
+- POST /query/aql for retrieving vital signs history, The body is valid aql query in the follwoing format
+```
+{"q": "SELECT c/uid/value from EHR e CONTAINS COMPOSITION c WHERE c/archetype_details/template_id/value =[[TEMPLATE_ID]] AND e/ehr_id/value=[[EHR_ID]]"}
+```
+- Proper error handling and response codes
+
+## Implementation Guidelines
+
+### Medblocks UI Integration
+1. Install required dependencies:
+   ```bash
+   npm install medblocks-ui
+   ```
+
+2. Import Medblocks UI in main application file:
+   ``
+   import "medblocks-ui";
+   import "medblocks-ui/dist/shoelace";
+   ```
+
+3. Use Medblocks UI components for form rendering:
+   ```html
+  <mb-auto-form id="form"></mb-auto-form>
+
+<script>
+  let form = document.getElementById("form")
+  xform.webTemplate = {
+  // insert your openEHR web template here.
+  }
+</script>
+   ```
+

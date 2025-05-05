@@ -1,0 +1,16 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# openEHR Form from template Webapp
+
+## Instructions about dependencies and libraries 
+
+The project already contains all starter dependencies of svelte, tailwindcss. So there is no need to reinitialize the app from scratch. Only install new libraries and dependencies required as part of the added code. Make sure "export const ssr = false;" is set in +page.js to prevent ssr. Dont try and update any tailwind configurations, tailwind has already been properly configured
+
+make sure to use 
+	import "medblocks-ui";
+	import "medblocks-ui/dist/shoelace"; in the +page.svelte file so that medblocks ui works 
+
+

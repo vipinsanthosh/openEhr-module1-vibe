@@ -1,8 +1,6 @@
 <script>
-	import "../app.css";
-	import "medblocks-ui";
-	import "medblocks-ui/dist/shoelace";
-
+	import '../app.css';
+	
 	let { children } = $props();
 </script>
 

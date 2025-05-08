@@ -1,7 +1,7 @@
 ---
 description: 
 globs: 
-alwaysApply: true
+alwaysApply: false
 ---
 # openEHR Form from template Webapp
 
@@ -9,8 +9,45 @@ alwaysApply: true
 
 The project already contains all starter dependencies of svelte, tailwindcss. So there is no need to reinitialize the app from scratch. Only install new libraries and dependencies required as part of the added code. Make sure "export const ssr = false;" is set in +page.js to prevent ssr. Dont try and update any tailwind configurations, tailwind has already been properly configured
 
-make sure to use 
-	import "medblocks-ui";
-	import "medblocks-ui/dist/shoelace"; in the +page.svelte file so that medblocks ui works 
+To import medblocks-ui and related styling add
+
+import "medblocks-ui";
+import "medblocks-ui/dist/shoelace";
+
+to +page.svelte where the form is being rendered
+
+The openEHR webtemplate is already present at the root and is called webtemplate.json. Dont create a new template
+
+composition_id look like this840f7425-4e5a-40af-ba8d-1e58a66706a4 and versioned_composition_id looks like this 840f7425-4e5a-40af-ba8d-1e58a66706a4::openehr-bootcamp.medblocks.com::1
+the _uid present in the flat composition is a versioned_composition_id , you can extract the composition_id by simply splitting at ::
 
 
+### Medblocks UI Integration
+1. Install required dependencies:
+   ```bash
+   npm install medblocks-ui
+   ```
+
+2. Import Medblocks UI in main application file:
+   ``
+   import "medblocks-ui";
+   import "medblocks-ui/dist/shoelace";
+   ```
+
+3. Use Medblocks UI components for form rendering:
+   ```html
+  <mb-auto-form id="form"></mb-auto-form>
+
+<script>
+  let form = document.getElementById("form")
+  xform.webTemplate = {
+  // insert your openEHR web template here.
+  }
+</script>
+   ```
+
+4. To export a flat composition from the rendered form, its form.export()
+
+5. To import a flat composition to a rendered form, its form.import()
+
+6. to clear the form use form.import({})

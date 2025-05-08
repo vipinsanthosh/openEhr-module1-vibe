@@ -1,7 +1,7 @@
 ---
 description: 
 globs: 
-alwaysApply: true
+alwaysApply: false
 ---
 # openEHR Vital Signs Application - PRD
 
@@ -9,52 +9,17 @@ alwaysApply: true
 ## Technical Architecture
 
 ### Application Flow
-1. load openEHR webtemplate present in the utils folder into mb-auto-form
+1. load openEHR webtemplate present in the root named as webtemplate.json into mb-auto-form
 2. Medblocks UI renders form based on template
 3. User enters vital signs
-4. mb-auto-form generates a vaid flat openEHR composition 
-5. submits it to the ehrbase openEHR composition endpoint using a button 
+4. mb-auto-form generates a vaid flat openEHR composition that exported with the click of a button
+5. Submit the exported flat openEHR composition to the POST composition endpoint 
 7. User receives confirmation of successful and clear the form
-8. List the created compositions usinf an AQL query to the ehrbase server based on the template ID and ehr id
-9. The listed compositions need to have two buttons Edit and Delete
-10.The Edit button does a update and allows editing of composition. 
-11.The Delete button allows to delete a composition
+8. List the created compositions using an AQL query to the ehrbase server based on the template_id and ehr_id
+9. List the retrieved composition ids as a list
+10.The listed compositions ids need to have two buttons Edit and Delete next to it for the respective functionalties
+11.On clicking Edit , the respective flat composition should be fetched and imported into the mb_auto_form
+12. Make sure the submit button specifies the editing state and on submit update the values of the composition by exporting the flat ehrcomposition and doing a composition PUT request
+11.The Delete button allows to delete a composition with a proper conformation
 
-
-
-
-### API Requirements
-- POST /composition?templateId={{templateId}} for creating new vital signs records
-- PUT /composition?templateId={{templateId}} for updating existing records
-- POST /query/aql for retrieving vital signs history, The body is valid aql query in the follwoing format
-```
-{"q": "SELECT c/uid/value from EHR e CONTAINS COMPOSITION c WHERE c/archetype_details/template_id/value =[[TEMPLATE_ID]] AND e/ehr_id/value=[[EHR_ID]]"}
-```
-- Proper error handling and response codes
-
-## Implementation Guidelines
-
-### Medblocks UI Integration
-1. Install required dependencies:
-   ```bash
-   npm install medblocks-ui
-   ```
-
-2. Import Medblocks UI in main application file:
-   ``
-   import "medblocks-ui";
-   import "medblocks-ui/dist/shoelace";
-   ```
-
-3. Use Medblocks UI components for form rendering:
-   ```html
-  <mb-auto-form id="form"></mb-auto-form>
-
-<script>
-  let form = document.getElementById("form")
-  xform.webTemplate = {
-  // insert your openEHR web template here.
-  }
-</script>
-   ```
 

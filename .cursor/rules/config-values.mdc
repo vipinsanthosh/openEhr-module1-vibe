@@ -1,16 +1,16 @@
 ---
 description: 
 globs: 
-alwaysApply: true
+alwaysApply: false
 ---
 # Following app config values 
 
-ehrbase server baseURL: https://openehr-bootcamp.medblocks.com/ehrbase
+ehrbase server baseUrl: https://openehr-bootcamp.medblocks.com/ehrbase
 
 openehrBaseUrl: {{baseUrl}}/rest/openehr/v1
 
-template_id: Basic_Vitals_Dominique.v2
+template_id: simple_vitals_sidharth.v0
 
-ehrId: 059c35b6-c6ab-4d30-be30-d62c33c1cdd9
+ehrId: 70c59833-d7da-438c-b6ff-c29b3963ea95
 
-webtemplate path : /src/lib/utils/vitals_webtemplate.json
+webtemplate path : webtemplate.json in the root of the project
